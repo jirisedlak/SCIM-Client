@@ -167,8 +167,7 @@ public class UmaScim2ClientImpl extends BaseScim2ClientImpl {
 	        tokenRequest.setAlgorithm(algorithm);
 	        tokenRequest.setKeyId(keyId);
 	        tokenRequest.setAudience(metadataConfiguration.getTokenEndpoint());
-
-			this.umaAat = UmaClient.request(metadataConfiguration.getTokenEndpoint(), tokenRequest);
+			this.umaAat = UmaClient.request(metadataConfiguration.getTokenEndpoint(), tokenRequest, this.executor);
 		} catch (ClientResponseFailure ex) {
 			String errorMessage = (String) ex.getResponse().getEntity(String.class);
 			throw new ScimInitializationException("Failed to get AAT token. Error: " + errorMessage, ex);
